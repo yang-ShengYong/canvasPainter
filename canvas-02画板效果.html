@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>做一个画板</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        #canvas {
+            border: 1px solid pink;
+        }
+    </style>
+</head>
+
+<body>
+    <p>
+        颜色：<input type="color" id="color" />
+        粗细：<input type="range" id="range" min="1" max="20" value="3" />
+        <span id="cx">3</span>
+        <input type="button" id="xp" value="橡皮擦" />
+    </p>
+
+    <canvas id="canvas" width="1000px" height="600px"></canvas>
+    <script>
+        var canvas = document.getElementById('canvas');
+        var cv = canvas.getContext('2d');
+        //给画板添加鼠标按下事件
+        canvas.onmousedown = function (e) {
+            var ev = window.event || e;
+            //获得鼠标位置
+            var mouseX = ev.layerX || ev.offsetX;
+            var mouseY = ev.layerY || ev.offsetY;
+            //开启路径，设置起点
+            cv.beginPath();
+            cv.moveTo(mouseX, mouseY);
+            canvas.onmousemove = function (e) {
+                var ev = window.event || e;
+                var newX = ev.layerX || ev.offsetX;
+                var newY = ev.layerY || ev.offsetY;
+                cv.lineTo(newX, newY);
+                cv.lineJoin = 'round';
+                cv.stroke();
+            }
+        }
+        canvas.onmouseup = function () {
+            canvas.onmousemove = null;
+            // cv.closePath();
+        }
+        //笔颜色
+        document.getElementById('color').onchange = function () {
+            cv.strokeStyle = this.value;
+        }
+        //笔粗细
+        document.getElementById('range').onchange = function () {
+            document.getElementById('cx').innerHTML = this.value;
+            cv.lineWidth = this.value;
+        }
+
+        //橡皮擦
+        document.getElementById('xp').onclick = function () {
+            cv.strokeStyle = "#fff";
+        }
+    </script>
+</body>
+
+</html>
