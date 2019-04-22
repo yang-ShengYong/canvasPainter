@@ -1,2 +1,2 @@
 # canvasPainterJS
-原生JS下一个简单的画板
+原生JS写一个简单的画板
