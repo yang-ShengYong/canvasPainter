@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    #canvas {
+      position: absolute;
+      margin: auto;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: #cccccc
+    }
+  </style>
+</head>
+
+<body>
+  <canvas id="canvas" width="300" height="300"><span>您的浏览器不支持canvas 赶紧给我去升级</span></canvas>
+  <script>
+    (function () {
+      var canvas = document.getElementById('canvas')
+      if (canvas.getContext) {
+        var ctx = canvas.getContext('2d')
+        var cw = canvas.width,
+          ch = canvas.height
+        var scaleX = 1,
+          scaleY = 1,
+          flag = 1
+        ctx.translate(cw / 2, ch / 2)
+
+        setInterval(function () {
+          ctx.clearRect(-cw, -ch, cw * 2, ch * 2)
+          ctx.rotate(-3 * Math.PI / 360)
+
+          ctx.save()
+          // ctx.scale(scaleX / 100, scaleY / 100)
+
+          // if (scaleX == 0) {
+          //   flag++
+          // } else if (scaleX == 200) {
+          //   flag--
+          // }
+          // scaleX = scaleY = scaleX + flag
+
+          ctx.beginPath()
+          // ctx.fillRect(-50, -50, 100, 100)
+          ctx.fillStyle = "green"
+          ctx.moveTo(0, 0)
+          ctx.lineTo(100, 0)
+          ctx.lineTo(30, -50)
+          ctx.fill()
+
+          ctx.beginPath()
+          ctx.fillStyle = "red"
+          ctx.moveTo(0, 0)
+          ctx.lineTo(0, -100)
+          ctx.lineTo(-50, -30)
+          ctx.fill()
+
+          ctx.beginPath()
+          ctx.fillStyle = "yellow"
+          ctx.moveTo(0, 0)
+          ctx.lineTo(-100, 0)
+          ctx.lineTo(-30, 50)
+          ctx.fill()
+
+          ctx.beginPath()
+          ctx.fillStyle = "blue"
+          ctx.moveTo(0, 0)
+          ctx.lineTo(0, 100)
+          ctx.lineTo(50, 30)
+          ctx.fill()
+          ctx.restore()
+        }, 30)
+
+      }
+    }())
+  </script>
+</body>
+
+</html>
