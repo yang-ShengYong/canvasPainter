@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>音阶导航</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+    }
+    html, body {
+      height: 100%;
+      overflow: hidden;
+    }
+    ul {
+      width: 908px;
+      height: 38px;
+      margin: 200px auto;
+      list-style: none;
+      background-color: aqua;
+      border: 1px solid;
+    }
+    ul>li {
+      float: left;
+      width: 100px;
+      height: 100%;
+      text-align: center;
+      line-height: 38px;
+      overflow: hidden;
+    }
+    ul>li:not(:last-child) {
+      border-right: 1px solid;
+    }
+    a {
+      text-decoration: none;
+      color: black;
+    }
+    ul>li>div.down {
+      height: 38px;
+      width: 100%;
+      background: yellow;
+    }
+    ul>li:hover div.down {
+      transform: translateY(-38px);
+      transition: .5s;
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <audio></audio>
+    <ul class="nav">
+      <li data-flag="a"><a href="#">1</a><div class="down"></div></li>
+      <li><a href="#">2</a><div class="down"></div></li>
+      <li data-flag="b"><a href="#">3</a><div class="down"></div></li>
+      <li><a href="#">4</a><div class="down"></div></li>
+      <li data-flag="c"><a href="#">5</a><div class="down"></div></li>
+      <li><a href="#">6</a><div class="down"></div></li>
+      <li data-flag="d"><a href="#">7</a><div class="down"></div></li>
+      <li><a href="#">8</a><div class="down"></div></li>
+      <li data-flag="e"><a href="#">9</a><div class="down"></div></li>
+    </ul>
+  </div>
+  <script> 
+    var liNodes = document.querySelectorAll('.nav>li')
+    var audio = document.querySelector('audio')
+
+    for (var i = 0; i<liNodes.length;i++){
+      liNodes[i].addEventListener('mouseenter', function () {
+        var flag = this.dataset.flag
+        if (flag) {
+          audio.src = `http://s8.qhimg.com/share/audio/piano1/${flag}4.mp3`
+        audio.play()
+        }
+        
+      })
+    }
+  </script>
+</body>
+</html>
